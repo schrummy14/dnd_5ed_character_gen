@@ -18,7 +18,6 @@ class Player:
         this.ac = 0
         this.proficiencyBonus = 0
         this.alignment = None
-        this.features = features.Features()
 
     def createRandom(this,level=1):
         this.level = level

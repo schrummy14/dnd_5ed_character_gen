@@ -9,4 +9,4 @@ print(a.atributes.values)
 a.atributes.rollAtributes(10,15)
 print(a.atributes.values)
 
-print(a.features.race)
+print(a.races.info.features)

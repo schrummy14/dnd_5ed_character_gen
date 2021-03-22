@@ -3,26 +3,26 @@ import features
 
 class Races:
     def __init__(this):
-        this.races = None
+        this.info = None
 
     def getRandom(this):
         race_id = random.randint(1,1)
         if race_id == 1:
-            this.races = Elf()
+            this.info = Elf()
         elif race_id == 2:
-            this.races = Halfling()
+            this.info = Halfling()
         elif race_id == 3:
-            this.races = Human()
+            this.info = Human()
         elif race_id == 4:
-            this.races = Dragonborn()
+            this.info = Dragonborn()
         elif race_id == 5:
-            this.races = Gnome()
+            this.info = Gnome()
         elif race_id == 6:
-            this.races = HalfElf()
+            this.info = HalfElf()
         elif race_id == 7:
-            this.races = Tiefling()
+            this.info = Tiefling()
         elif race_id == 8:
-            this.races = Dwarf()
+            this.info = Dwarf()
 
 
 class Dwarf:
@@ -37,12 +37,12 @@ class Dwarf:
             this.modstats = {
                 'wisdom': 1
                 }
-            features.raceFeatures(this,race='dwarf',subRace='hillDwarf')
+            this.features = features.raceFeatures(race='dwarf',subRace='hillDwarf')
         elif dwarf_id == 2:
             this.modstats = {
                 'strength': 2
                 }
-            features.raceFeatures(this,race='dwarf',subRace='mountainDwarf')
+            this.features = features.raceFeatures(race='dwarf',subRace='mountainDwarf')
 
         return
 
@@ -59,17 +59,17 @@ class Elf:
             this.modstats = {
                 'intelligence': 1
                 }
-            features.raceFeatures(this,race='elf',subRace='highElf')
+            this.features = features.raceFeatures(race='elf',subRace='highElf')
         elif elf_id == 2:
             this.modstats = {
                 'wisdom': 1
                 }
-            features.raceFeatures(this,race='elf',subRace='woodElf')
+            this.features = features.raceFeatures(race='elf',subRace='woodElf')
         elif elf_id == 3:
             this.modstats = {
                 'charisma': 1
                 }
-            features.raceFeatures(this,race='elf',subRace='drow')
+            this.features = features.raceFeatures(race='elf',subRace='drow')
         return
 
 class Halfling:
