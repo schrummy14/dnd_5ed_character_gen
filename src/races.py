@@ -34,14 +34,10 @@ class Dwarf:
 
         dwarf_id = random.randint(1,2)
         if dwarf_id == 1:
-            this.modstats = {
-                'wisdom': 1
-                }
+            this.modstats['wisdom'] = 1
             this.features = features.raceFeatures(race='dwarf',subRace='hillDwarf')
         elif dwarf_id == 2:
-            this.modstats = {
-                'strength': 2
-                }
+            this.modstats['strength'] = 2
             this.features = features.raceFeatures(race='dwarf',subRace='mountainDwarf')
 
         return
@@ -56,19 +52,13 @@ class Elf:
             }
         elf_id = random.randint(1,3)
         if elf_id == 1: 
-            this.modstats = {
-                'intelligence': 1
-                }
+            this.modstats['intelligence'] = 1
             this.features = features.raceFeatures(race='elf',subRace='highElf')
         elif elf_id == 2:
-            this.modstats = {
-                'wisdom': 1
-                }
+            this.modstats['wisdom'] = 1
             this.features = features.raceFeatures(race='elf',subRace='woodElf')
         elif elf_id == 3:
-            this.modstats = {
-                'charisma': 1
-                }
+            this.modstats['charisma'] = 1
             this.features = features.raceFeatures(race='elf',subRace='drow')
         return
 

@@ -25,8 +25,23 @@ class Player:
         this.classes.getRandom()
         this.health = 10
         this.atributes.rollAtributes()
+        this.addAtributeModifiers()
 
     def rollInitiative(this):
         val = random.randint(1,20) + this.atributes.modifiers['dexterity']
         return val
+    
+    def addAtributeModifiers(this):
+        # Add atribute modifiers from race
+        raceModifiers = this.races.info.modstats
+        keys = raceModifiers.keys()
+        for key in keys:
+            this.atributes.values[key] += raceModifiers[key]
+
+        # Add atribute modifiers from background or other...
+
+
+        
+        this.atributes.setModifiers()
+        return
 
