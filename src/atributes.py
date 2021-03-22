@@ -1,4 +1,4 @@
-import random
+import rolls
 
 class Atributes:
     def __init__(self):
@@ -19,14 +19,14 @@ class Atributes:
             "charisma": 0
         }
 
-    def rollAtributes(self,min=3,max=18):
+    def rollAtributes(self,min_val=1,max_val=6, maxAtributeValue=20, numberOfDice=4):
         self.values = {
-            "strength": random.randint(min,max),
-            "dexterity": random.randint(min,max),
-            "constitution": random.randint(min,max),
-            "intelligence": random.randint(min,max),
-            "wisdom": random.randint(min,max),
-            "charisma": random.randint(min,max)
+            "strength": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue),
+            "dexterity": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue),
+            "constitution": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue),
+            "intelligence": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue),
+            "wisdom": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue),
+            "charisma": min(rolls.rollAtribute(min_val,max_val,numberOfDice),maxAtributeValue)
         }
         self.setModifiers()
 

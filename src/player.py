@@ -1,6 +1,6 @@
 
 import races
-import random
+import rolls
 import skills
 import classes
 import atributes
@@ -28,7 +28,7 @@ class Player:
         self.addAtributeModifiers()
 
     def rollInitiative(self):
-        val = random.randint(1,20) + self.atributes.modifiers['dexterity']
+        val = rolls.d20() + self.atributes.modifiers['dexterity']
         return val
     
     def addAtributeModifiers(self):
