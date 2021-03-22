@@ -1,8 +1,8 @@
 import random
 
 class Atributes:
-    def __init__(this):
-        this.values = {
+    def __init__(self):
+        self.values = {
             "strength": 10,
             "dexterity": 10,
             "constitution": 10,
@@ -10,7 +10,7 @@ class Atributes:
             "wisdom": 10,
             "charisma": 10
         }
-        this.modifiers = {
+        self.modifiers = {
             "strength": 0,
             "dexterity": 0,
             "constitution": 0,
@@ -19,8 +19,8 @@ class Atributes:
             "charisma": 0
         }
 
-    def rollAtributes(this,min=3,max=18):
-        this.values = {
+    def rollAtributes(self,min=3,max=18):
+        self.values = {
             "strength": random.randint(min,max),
             "dexterity": random.randint(min,max),
             "constitution": random.randint(min,max),
@@ -28,16 +28,16 @@ class Atributes:
             "wisdom": random.randint(min,max),
             "charisma": random.randint(min,max)
         }
-        this.setModifiers()
+        self.setModifiers()
 
-    def setAtribute(this,atribute,value):
+    def setAtribute(self,atribute,value):
         try:
-            this.value[atribute] = value
-            this.setModifiers()
+            self.value[atribute] = value
+            self.setModifiers()
         except:
             print("bad selection")
 
-    def setModifiers(this):
-        keys = this.modifiers.keys()
+    def setModifiers(self):
+        keys = self.modifiers.keys()
         for key in keys:
-            this.modifiers[key] = (this.values[key] - 10)//2
+            self.modifiers[key] = (self.values[key] - 10)//2

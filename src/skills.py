@@ -1,7 +1,7 @@
 
 class Skills:
-    def __init__(this):
-        this.skills = {
+    def __init__(self):
+        self.skills = {
             "acrobatics": 0,
             "animalHandling": 0,
             "arcana": 0,

@@ -2,86 +2,86 @@ import random
 import features
 
 class Races:
-    def __init__(this):
-        this.info = None
+    def __init__(self):
+        self.info = None
 
-    def getRandom(this):
+    def getRandom(self):
         race_id = random.randint(1,1)
         if race_id == 1:
-            this.info = Elf()
+            self.info = Elf()
         elif race_id == 2:
-            this.info = Halfling()
+            self.info = Halfling()
         elif race_id == 3:
-            this.info = Human()
+            self.info = Human()
         elif race_id == 4:
-            this.info = Dragonborn()
+            self.info = Dragonborn()
         elif race_id == 5:
-            this.info = Gnome()
+            self.info = Gnome()
         elif race_id == 6:
-            this.info = HalfElf()
+            self.info = HalfElf()
         elif race_id == 7:
-            this.info = Tiefling()
+            self.info = Tiefling()
         elif race_id == 8:
-            this.info = Dwarf()
+            self.info = Dwarf()
 
 
 class Dwarf:
-    def __init__(this):
-        this.modstats = {
+    def __init__(self):
+        self.modstats = {
             'constitution': 2
             }
-        this.speed = 25
+        self.speed = 25
 
         dwarf_id = random.randint(1,2)
         if dwarf_id == 1:
-            this.modstats['wisdom'] = 1
-            this.features = features.raceFeatures(race='dwarf',subRace='hillDwarf')
+            self.modstats['wisdom'] = 1
+            self.features = features.raceFeatures(race='dwarf',subRace='hillDwarf')
         elif dwarf_id == 2:
-            this.modstats['strength'] = 2
-            this.features = features.raceFeatures(race='dwarf',subRace='mountainDwarf')
+            self.modstats['strength'] = 2
+            self.features = features.raceFeatures(race='dwarf',subRace='mountainDwarf')
 
         return
 
 
 
 class Elf:
-    def __init__(this):
+    def __init__(self):
 
-        this.modstats = {
+        self.modstats = {
             'dexterity': 2
             }
         elf_id = random.randint(1,3)
         if elf_id == 1: 
-            this.modstats['intelligence'] = 1
-            this.features = features.raceFeatures(race='elf',subRace='highElf')
+            self.modstats['intelligence'] = 1
+            self.features = features.raceFeatures(race='elf',subRace='highElf')
         elif elf_id == 2:
-            this.modstats['wisdom'] = 1
-            this.features = features.raceFeatures(race='elf',subRace='woodElf')
+            self.modstats['wisdom'] = 1
+            self.features = features.raceFeatures(race='elf',subRace='woodElf')
         elif elf_id == 3:
-            this.modstats['charisma'] = 1
-            this.features = features.raceFeatures(race='elf',subRace='drow')
+            self.modstats['charisma'] = 1
+            self.features = features.raceFeatures(race='elf',subRace='drow')
         return
 
 class Halfling:
-    def __init__(this):
+    def __init__(self):
         return
 
 class Human:
-    def __init__(this):
+    def __init__(self):
         return
 
 class Dragonborn:
-    def __init__(this):
+    def __init__(self):
         return
 
 class Gnome:
-    def __init__(this):
+    def __init__(self):
         return
 
 class HalfElf:
-    def __init__(this):
+    def __init__(self):
         return
 
 class Tiefling:
-    def __init__(this):
+    def __init__(self):
         return

@@ -8,40 +8,38 @@ import features
 
 
 class Player:
-    def __init__(this):
-        this.health = 0
-        this.atributes = atributes.Atributes()
-        this.skills = skills.Skills()
-        this.races = races.Races()
-        this.classes = classes.Classes()
-        this.level = 0
-        this.ac = 0
-        this.proficiencyBonus = 0
-        this.alignment = None
+    def __init__(self):
+        self.health = 0
+        self.atributes = atributes.Atributes()
+        self.skills = skills.Skills()
+        self.races = races.Races()
+        self.classes = classes.Classes()
+        self.level = 0
+        self.ac = 0
+        self.proficiencyBonus = 0
+        self.alignment = None
 
-    def createRandom(this,level=1):
-        this.level = level
-        this.races.getRandom()
-        this.classes.getRandom()
-        this.health = 10
-        this.atributes.rollAtributes()
-        this.addAtributeModifiers()
+    def createRandom(self,level=1):
+        self.level = level
+        self.races.getRandom()
+        self.classes.getRandom()
+        self.health = 10
+        self.atributes.rollAtributes()
+        self.addAtributeModifiers()
 
-    def rollInitiative(this):
-        val = random.randint(1,20) + this.atributes.modifiers['dexterity']
+    def rollInitiative(self):
+        val = random.randint(1,20) + self.atributes.modifiers['dexterity']
         return val
     
-    def addAtributeModifiers(this):
+    def addAtributeModifiers(self):
         # Add atribute modifiers from race
-        raceModifiers = this.races.info.modstats
+        raceModifiers = self.races.info.modstats
         keys = raceModifiers.keys()
         for key in keys:
-            this.atributes.values[key] += raceModifiers[key]
+            self.atributes.values[key] += raceModifiers[key]
 
         # Add atribute modifiers from background or other...
-
-
         
-        this.atributes.setModifiers()
+        self.atributes.setModifiers()
         return
 

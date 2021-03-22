@@ -1,8 +1,8 @@
 
 class Classes:
-    def __init__(this):
-        this.classes = None
+    def __init__(self):
+        self.classes = None
         return
-    def getRandom(this):
+    def getRandom(self):
         return
 
