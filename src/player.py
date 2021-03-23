@@ -15,6 +15,7 @@ class Player:
         self.races = races.Races()
         self.classes = classes.Classes()
         self.level = 0
+        self.exp = 0
         self.ac = 0
         self.proficiencyBonus = 0
         self.alignment = None
@@ -23,9 +24,10 @@ class Player:
         self.level = level
         self.races.getRandom()
         self.classes.getRandom()
-        self.health = 10
         self.atributes.rollAtributes()
         self.addAtributeModifiers()
+
+        self.health = classes._HitDie[self.classes.info.className] + self.atributes.modifiers["constitution"]
 
     def rollInitiative(self):
         val = rolls.d20() + self.atributes.modifiers['dexterity']
