@@ -21,13 +21,12 @@ class Player:
         self.alignment = None
 
     def createRandom(self,level=1):
-        self.level = level
+        self.level = 0
         self.races.getRandom()
         self.classes.getRandom()
         self.atributes.rollAtributes()
         self.addAtributeModifiers()
-
-        self.health = classes._HitDie[self.classes.info.className] + self.atributes.modifiers["constitution"]
+        self.levelUp(level)
 
     def rollInitiative(self):
         val = rolls.d20() + self.atributes.modifiers['dexterity']
@@ -44,4 +43,37 @@ class Player:
         
         self.atributes.setModifiers()
         return
+    
+    def levelUp(self, newLevel):
+        if self.level > 1:
+            self.health -= self.level*self.atributes.modifiers["constitution"]
+        while self.level < newLevel:
+            self.level += 1
+            if self.level == 1:
+                self.health = classes._HitDie[self.classes.info.className]
+            else:
+                self.health += self.classes.info.hitDie()
 
+            # Call class specific level ups
+            self.classes.info.levelUp()
+            if self.level % 4 == 0:
+                for k in range(2):
+                    atribute_name = self.chooseAtributeToIncrease()
+                    print("increasing", atribute_name)
+                    self.atributes.values[atribute_name] += 1
+        self.atributes.setModifiers()
+        self.health += self.level*self.atributes.modifiers["constitution"]
+    
+    def chooseAtributeToIncrease(self):
+        # Here is where we can add logic to better choose how and when an atribute increases.
+        # Right now it prioritizes con, after that it goes in atribute order (str->dex->...).
+        # How to choose should be class specific and we will probably want to write a function
+        # for each class on how to choose the atribute.
+        vals2increase = list()
+        for key in self.atributes.modifiers.keys():
+            if self.atributes.values[key] < 20:
+                vals2increase.append(key)
+        if "constitution" in vals2increase:
+            return "constitution"
+        else:
+            return vals2increase[0]

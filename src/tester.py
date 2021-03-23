@@ -1,23 +1,16 @@
 import player
+import classes
 import features
 
 a = player.Player()
-a.races.setRace("Dwarf")
-print("race:", a.races.info.features['race'])
-print("sub race:", a.races.info.features['subRace'])
 
-a.races.setRace("Dwarf","Mountain Dwarf")
-print("race:", a.races.info.features['race'])
-print("sub race:", a.races.info.features['subRace'])
-
-a.classes.setClass("Fighter")
-print("Class:", a.classes.info.className)
-print("hit die roll:", a.classes.info.hitDie())
-
+# Create a random character at level 1
 a.createRandom(1)
 
-print(a.atributes.values)
-print(a.atributes.modifiers)
+# Re roll atributes, reset level and level to 1
+a.atributes.rollAtributes(min_val=1,max_val=6)
+a.level = 0
+a.levelUp(1)
 
 print("race:", a.races.info.features['race'])
 print("sub race:", a.races.info.features['subRace'])
@@ -25,6 +18,19 @@ print("features")
 features.printFeatures(a.races.info.features['features'])
 
 print("Class:", a.classes.info.className)
-print("hit die roll:", a.classes.info.hitDie())
-
+print("Level:", a.level)
+print("starting hit die:", classes._HitDie[a.classes.info.className])
 print("Current Health:", a.health)
+print(a.atributes.values)
+print(a.atributes.modifiers)
+
+# Make a level 20 character
+a.levelUp(20)
+print("\nClass:", a.classes.info.className)
+print("Level:", a.level)
+print("starting hit die:", classes._HitDie[a.classes.info.className])
+print("Current Health:", a.health)
+print(a.atributes.values)
+print(a.atributes.modifiers)
+
+print("\n")

@@ -1,3 +1,7 @@
+# We may want to move each class (fighter, warlock, bard, ect...) to their own file... 
+# I can see each class getting quite large when we start to get into what each class gets
+# as they level up...
+
 import rolls
 from random import randint
 
@@ -6,7 +10,7 @@ class Classes:
         self.info = GenClass()
 
     def getRandom(self):
-        randClassId = randint(1,1)
+        randClassId = randint(1,5)
         if randClassId == 1:
             self.info = Barbarian()
         elif randClassId == 2:
@@ -36,6 +40,7 @@ class Classes:
     def setClass(self, className):
         self.info = _Classes[className]()
 
+
 class GenClass:
     def __init__(self):
         self.hitDie = None
@@ -43,6 +48,9 @@ class GenClass:
         self.primaryAbility = None
         self.savingThrowProficiencies = None
         self.armorWeaponProficiencies = None
+
+    def levelUp(self):
+        return None
 
 class Barbarian(GenClass):
     def __init__(self):
