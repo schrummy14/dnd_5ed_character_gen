@@ -36,6 +36,18 @@ class Atributes:
             self.setModifiers()
         except:
             print("bad selection")
+    
+    def setAtributes(self,atributes):
+        if isinstance(atributes,dict):
+            # If you pass in atributes as a dictionary
+            for key in self.values.keys():
+                self.values[key] = atributes[key]
+        else:
+            # If you pass in atributes as a list
+            for k,key in enumerate(self.values.keys()):
+                print(key,k)
+                self.values[key] = atributes[k]
+        self.setModifiers()
 
     def setModifiers(self):
         keys = self.modifiers.keys()
