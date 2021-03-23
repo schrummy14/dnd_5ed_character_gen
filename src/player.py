@@ -20,6 +20,17 @@ class Player:
         self.proficiencyBonus = 0
         self.alignment = None
 
+    def create(self, race, className, level=1, subrace=None, atributes=None):
+        self.level = 0
+        self.races.setRace(race, subrace)
+        self.classes.setClass(className)
+        if atributes is None:
+            self.atributes.rollAtributes()
+        else:
+            self.atributes.setAtributes(atributes)
+        self.addAtributeModifiers()
+        self.levelUp(level)
+
     def createRandom(self,level=1):
         self.level = 0
         self.races.getRandom()
