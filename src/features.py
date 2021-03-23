@@ -1,17 +1,37 @@
 
 
 _dwarf = {
-    'darkvision' : "Darkvision: Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.", 
-    'dwarvenResilience' : "Dwarven Resilience: You have advantage on saving throws against poison, and you have resistance against poison damage.", 
-    'dwarvenCombatTraining' : "Dwarven Combat Training: You have proficiency with the battleaxe, handaxe, throwing hammer, and warhammer.", 
-    'toolProficiency' : "Tool Proficiency: You gain proficiency with the artisan's tools of your choice: smith's tools, brewer's supplies, or mason's tools.", 
-    'stonecunning' : "Stonecunning: whenever you make an Intelligence (history) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus."
+    'darkvision' : """
+    Darkvision: Accustomed to life underground, you have superior vision in dark and dim conditions.
+                You can see in dim light within 60 feet of you as if it were bright light, and in
+                darkness as if it were dim light. You can't discern color in darkness, only shades
+                of gray.""", 
+
+    'dwarvenResilience' : """
+    Dwarven Resilience: You have advantage on saving throws against poison, and you have resistance
+                        against poison damage.""", 
+
+    'dwarvenCombatTraining' : """
+    Dwarven Combat Training: You have proficiency with the battleaxe, handaxe, throwing hammer, and
+                             warhammer.""", 
+
+    'toolProficiency' : """
+    Tool Proficiency: You gain proficiency with the artisan's tools of your choice: smith's tools,
+                      brewer's supplies, or mason's tools.""",
+
+    'stonecunning' : """
+    Stonecunning: Whenever you make an Intelligence (history) check related to the origin of
+                  stonework, you are considered proficient in the History skill and add double your
+                  proficiency bonus to the check, instead of your normal proficiency bonus."""
     }
 _hillDwarf = {
-    'dwarvenToughness' : "Dwarven Toughness: Your hit point maximum increases by 1, and it increases by 1 every time you gain a level."
+    'dwarvenToughness' : """
+    Dwarven Toughness: Your hit point maximum increases by 1, and it increases by 1 every time you
+                       gain a level."""
     }
 _mountainDwarf = {
-    'dwarvenArmorTraining' : "Dwarven Armor Training: You have proficiency with light and medium armor."
+    'dwarvenArmorTraining' : """
+    Dwarven Armor Training: You have proficiency with light and medium armor."""
     }
 
 _elf = {
@@ -69,13 +89,13 @@ _drow = {
     }
     
 _features = {
-    "dwarf": _dwarf,
-    "hillDwarf": _hillDwarf,
-    "mountainDwarf": _mountainDwarf,
-    "elf": _elf,
-    "highElf": _highElf,
-    "woodElf": _woodElf,
-    "drow": _drow
+    "Dwarf": _dwarf,
+    "Hill Dwarf": _hillDwarf,
+    "Mountain Dwarf": _mountainDwarf,
+    "Elf": _elf,
+    "High Elf": _highElf,
+    "Wood Elf": _woodElf,
+    "Drow": _drow
 }
 
 def raceFeatures(race,subRace):
