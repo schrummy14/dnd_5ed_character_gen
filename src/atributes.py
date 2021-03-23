@@ -32,7 +32,7 @@ class Atributes:
 
     def setAtribute(self,atribute,value):
         try:
-            self.value[atribute] = value
+            self.values[atribute] = value
             self.setModifiers()
         except:
             print("bad selection")
