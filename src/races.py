@@ -3,7 +3,7 @@ from random import randint
 
 class Races:
     def __init__(self):
-        self.info = None
+        self.info = GenRace()
 
     def getRandom(self):
         race_id = randint(1,1)
@@ -27,7 +27,14 @@ class Races:
     def setRace(self, race, subRace=None):
         self.info = _Races[race](subRace)
 
-class Dwarf:
+class GenRace:
+    def __init__(self, subRace=None):
+        self.modstats = None
+        self.speed = None
+        self.features = None
+
+
+class Dwarf(GenRace):
     def __init__(self, subRace=None):
         self.modstats = {
             'constitution': 2
@@ -55,7 +62,7 @@ class Dwarf:
 
 
 
-class Elf:
+class Elf(GenRace):
     def __init__(self, subRace=None):
 
         self.modstats = {
@@ -87,27 +94,27 @@ class Elf:
             self.features = features.raceFeatures(race='Elf',subRace='Drow')
         return
 
-class Halfling:
+class Halfling(GenRace):
     def __init__(self, subRace=None):
         return
 
-class Human:
+class Human(GenRace):
     def __init__(self, subRace=None):
         return
 
-class Dragonborn:
+class Dragonborn(GenRace):
     def __init__(self, subRace=None):
         return
 
-class Gnome:
+class Gnome(GenRace):
     def __init__(self, subRace=None):
         return
 
-class HalfElf:
+class HalfElf(GenRace):
     def __init__(self, subRace=None):
         return
 
-class Tiefling:
+class Tiefling(GenRace):
     def __init__(self, subRace=None):
         return
 

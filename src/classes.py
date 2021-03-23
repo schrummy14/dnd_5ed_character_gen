@@ -3,10 +3,10 @@ from random import randint
 
 class Classes:
     def __init__(self):
-        self.info = None
+        self.info = GenClass()
 
     def getRandom(self):
-        randClassId = randint(1,5)
+        randClassId = randint(1,1)
         if randClassId == 1:
             self.info = Barbarian()
         elif randClassId == 2:
@@ -36,7 +36,15 @@ class Classes:
     def setClass(self, className):
         self.info = _Classes[className]()
 
-class Barbarian:
+class GenClass:
+    def __init__(self):
+        self.hitDie = None
+        self.className = None
+        self.primaryAbility = None
+        self.savingThrowProficiencies = None
+        self.armorWeaponProficiencies = None
+
+class Barbarian(GenClass):
     def __init__(self):
         self.hitDie = rolls.d12
         self.className = "Barbarian"
@@ -44,7 +52,7 @@ class Barbarian:
         self.savingThrowProficiencies = ["Strength", "Constitution"]
         self.armorWeaponProficiencies = ["Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons"]
     
-class Bard:
+class Bard(GenClass):
     def __init__(self):
         self.hitDie = rolls.d8
         self.className = "Bard"
@@ -52,7 +60,7 @@ class Bard:
         self.savingThrowProficiencies = ["Dexterity", "Charisma"]
         self.armorWeaponProficiencies = ["Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"]
 
-class Cleric:
+class Cleric(GenClass):
     def __init__(self):
         self.hitDie = rolls.d8
         self.className = "Cleric"
@@ -60,7 +68,7 @@ class Cleric:
         self.savingThrowProficiencies = ["Wisdom", "Charisma"]
         self.armorWeaponProficiencies = ["Light Armor", "Medium Armor", "Shields", "Simple Weapons"]
 
-class Druid:
+class Druid(GenClass):
     def __init__(self):
         self.hitDie = rolls.d8
         self.className = "Druid"
@@ -70,7 +78,7 @@ class Druid:
             "Light Armor (nonmetal)", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers",
             "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"]
 
-class Fighter:
+class Fighter(GenClass):
     def __init__(self):
         self.hitDie = rolls.d10
         self.className = "Fighter"
@@ -81,31 +89,31 @@ class Fighter:
         self.savingThrowProficiencies = ["Strength", "Constitution"]
         self.armorWeaponProficiencies = ["All Armor", "Shields", "Simple Weapons", "Martial Weapons"]
 
-class Monk:
+class Monk(GenClass):
     def __init__(self):
         pass
 
-class Paladin:
+class Paladin(GenClass):
     def __init__(self):
         pass
 
-class Ranger:
+class Ranger(GenClass):
     def __init__(self):
         pass
 
-class Rogue:
+class Rogue(GenClass):
     def __init__(self):
         pass
 
-class Sorcerer:
+class Sorcerer(GenClass):
     def __init__(self):
         pass
 
-class Warlock:
+class Warlock(GenClass):
     def __init__(self):
         pass
 
-class Wizard:
+class Wizard(GenClass):
     def __init__(self):
         pass
 
