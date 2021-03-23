@@ -1,12 +1,12 @@
-import random
 import features
+from random import randint
 
 class Races:
     def __init__(self):
         self.info = None
 
     def getRandom(self):
-        race_id = random.randint(1,1)
+        race_id = randint(1,1)
         if race_id == 1:
             self.info = Elf()
         elif race_id == 2:
@@ -23,65 +23,101 @@ class Races:
             self.info = Tiefling()
         elif race_id == 8:
             self.info = Dwarf()
-
+    
+    def setRace(self, race, subRace=None):
+        self.info = _Races[race](subRace)
 
 class Dwarf:
-    def __init__(self):
+    def __init__(self, subRace=None):
         self.modstats = {
             'constitution': 2
             }
         self.speed = 25
 
-        dwarf_id = random.randint(1,2)
+        if subRace is None:
+            dwarf_id = randint(1,2)
+        else:
+            if subRace == "Hill Dwarf":
+                dwarf_id = 1
+            elif subRace == "Mountain Dwarf":
+                dwarf_id = 2
+            else:
+                print("%s: is not valid" % (subRace))
+                print("Valid Options:\n\tHill Dwarf\n\tMountain Dwarf")
         if dwarf_id == 1:
             self.modstats['wisdom'] = 1
-            self.features = features.raceFeatures(race='dwarf',subRace='hillDwarf')
+            self.features = features.raceFeatures(race='Dwarf',subRace='Hill Dwarf')
         elif dwarf_id == 2:
             self.modstats['strength'] = 2
-            self.features = features.raceFeatures(race='dwarf',subRace='mountainDwarf')
+            self.features = features.raceFeatures(race='Dwarf',subRace='Mountain Dwarf')
 
         return
 
 
 
 class Elf:
-    def __init__(self):
+    def __init__(self, subRace=None):
 
         self.modstats = {
             'dexterity': 2
             }
-        elf_id = random.randint(1,3)
+        self.speed = 30
+
+        if subRace is None:
+            elf_id = randint(1,3)
+        else:
+            if subRace == "High Elf":
+                elf_id = 1
+            elif subRace == "Wood Elf":
+                elf_id = 2
+            elif subRace == "Drow":
+                elf_id = 3
+            else:
+                print("%s: is not valid" % (subRace))
+                print("Valid Options:\n\tHigh Elf\n\tWood Elf\n\tDrow")
+        
         if elf_id == 1: 
             self.modstats['intelligence'] = 1
-            self.features = features.raceFeatures(race='elf',subRace='highElf')
+            self.features = features.raceFeatures(race='Elf',subRace='High Elf')
         elif elf_id == 2:
             self.modstats['wisdom'] = 1
-            self.features = features.raceFeatures(race='elf',subRace='woodElf')
+            self.features = features.raceFeatures(race='Elf',subRace='Wood Elf')
         elif elf_id == 3:
             self.modstats['charisma'] = 1
-            self.features = features.raceFeatures(race='elf',subRace='drow')
+            self.features = features.raceFeatures(race='Elf',subRace='Drow')
         return
 
 class Halfling:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
 
 class Human:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
 
 class Dragonborn:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
 
 class Gnome:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
 
 class HalfElf:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
 
 class Tiefling:
-    def __init__(self):
+    def __init__(self, subRace=None):
         return
+
+_Races = {
+    "Dwarf": Dwarf,
+    "Elf": Elf,
+    "Halfling": Halfling,
+    "Human": Human,
+    "Dragonborn": Dragonborn,
+    "Gnome": Gnome,
+    "HalfElf": HalfElf,
+    "Tiefling": Tiefling
+}
