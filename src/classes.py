@@ -1,9 +1,17 @@
-# We may want to move each class (fighter, warlock, bard, ect...) to their own file... 
-# I can see each class getting quite large when we start to get into what each class gets
-# as they level up...
-
-import rolls
 from random import randint
+from Classes.GenClass import GenClass
+from Classes.Barbarian import Barbarian
+from Classes.Bard import Bard
+from Classes.Cleric import Cleric
+from Classes.Druid import Druid
+from Classes.Fighter import Fighter
+from Classes.Monk import Monk
+from Classes.Paladin import Paladin
+from Classes.Ranger import Ranger
+from Classes.Rogue import Rogue
+from Classes.Sorcerer import Sorcerer
+from Classes.Warlock import Warlock
+from Classes.Wizard import Wizard
 
 class Classes:
     def __init__(self):
@@ -39,91 +47,6 @@ class Classes:
 
     def setClass(self, className):
         self.info = _Classes[className]()
-
-
-class GenClass:
-    def __init__(self):
-        self.hitDie = None
-        self.className = None
-        self.primaryAbility = None
-        self.savingThrowProficiencies = None
-        self.armorWeaponProficiencies = None
-
-    def levelUp(self):
-        return None
-
-class Barbarian(GenClass):
-    def __init__(self):
-        self.hitDie = rolls.d12
-        self.className = "Barbarian"
-        self.primaryAbility = "Strength"
-        self.savingThrowProficiencies = ["Strength", "Constitution"]
-        self.armorWeaponProficiencies = ["Light Armor", "Medium Armor", "Shields", "Simple Weapons", "Martial Weapons"]
-    
-class Bard(GenClass):
-    def __init__(self):
-        self.hitDie = rolls.d8
-        self.className = "Bard"
-        self.primaryAbility = "Charisma"
-        self.savingThrowProficiencies = ["Dexterity", "Charisma"]
-        self.armorWeaponProficiencies = ["Light Armor", "Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"]
-
-class Cleric(GenClass):
-    def __init__(self):
-        self.hitDie = rolls.d8
-        self.className = "Cleric"
-        self.primaryAbility = "Wisdom"
-        self.savingThrowProficiencies = ["Wisdom", "Charisma"]
-        self.armorWeaponProficiencies = ["Light Armor", "Medium Armor", "Shields", "Simple Weapons"]
-
-class Druid(GenClass):
-    def __init__(self):
-        self.hitDie = rolls.d8
-        self.className = "Druid"
-        self.primaryAbility = "Wisdom"
-        self.savingThrowProficiencies = ["Intelligence", "Wisdom"]
-        self.armorWeaponProficiencies = [
-            "Light Armor (nonmetal)", "Medium Armor (nonmetal)", "Shields (nonmetal)", "Clubs", "Daggers",
-            "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"]
-
-class Fighter(GenClass):
-    def __init__(self):
-        self.hitDie = rolls.d10
-        self.className = "Fighter"
-        if randint(1,2) == 1:
-            self.primaryAbility = "Strength"
-        else:
-            self.primaryAbility = "Dexterity"
-        self.savingThrowProficiencies = ["Strength", "Constitution"]
-        self.armorWeaponProficiencies = ["All Armor", "Shields", "Simple Weapons", "Martial Weapons"]
-
-class Monk(GenClass):
-    def __init__(self):
-        pass
-
-class Paladin(GenClass):
-    def __init__(self):
-        pass
-
-class Ranger(GenClass):
-    def __init__(self):
-        pass
-
-class Rogue(GenClass):
-    def __init__(self):
-        pass
-
-class Sorcerer(GenClass):
-    def __init__(self):
-        pass
-
-class Warlock(GenClass):
-    def __init__(self):
-        pass
-
-class Wizard(GenClass):
-    def __init__(self):
-        pass
 
 _Classes = {
     "Barbarian": Barbarian,
