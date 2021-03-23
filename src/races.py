@@ -1,5 +1,7 @@
 import features
 from random import randint
+from Races.Dwarf import Dwarf
+from Races.GenRace import GenRace
 
 class Races:
     def __init__(self):
@@ -27,38 +29,38 @@ class Races:
     def setRace(self, race, subRace=None):
         self.info = _Races[race](subRace)
 
-class GenRace:
-    def __init__(self, subRace=None):
-        self.modstats = None
-        self.speed = None
-        self.features = None
+# class GenRace:
+#     def __init__(self, subRace=None):
+#         self.modstats = None
+#         self.speed = None
+#         self.features = None
 
 
-class Dwarf(GenRace):
-    def __init__(self, subRace=None):
-        self.modstats = {
-            'constitution': 2
-            }
-        self.speed = 25
+# class Dwarf(GenRace):
+#     def __init__(self, subRace=None):
+#         self.modstats = {
+#             'constitution': 2
+#             }
+#         self.speed = 25
 
-        if subRace is None:
-            dwarf_id = randint(1,2)
-        else:
-            if subRace == "Hill Dwarf":
-                dwarf_id = 1
-            elif subRace == "Mountain Dwarf":
-                dwarf_id = 2
-            else:
-                print("%s: is not valid" % (subRace))
-                print("Valid Options:\n\tHill Dwarf\n\tMountain Dwarf")
-        if dwarf_id == 1:
-            self.modstats['wisdom'] = 1
-            self.features = features.raceFeatures(race='Dwarf',subRace='Hill Dwarf')
-        elif dwarf_id == 2:
-            self.modstats['strength'] = 2
-            self.features = features.raceFeatures(race='Dwarf',subRace='Mountain Dwarf')
+#         if subRace is None:
+#             dwarf_id = randint(1,2)
+#         else:
+#             if subRace == "Hill Dwarf":
+#                 dwarf_id = 1
+#             elif subRace == "Mountain Dwarf":
+#                 dwarf_id = 2
+#             else:
+#                 print("%s: is not valid" % (subRace))
+#                 print("Valid Options:\n\tHill Dwarf\n\tMountain Dwarf")
+#         if dwarf_id == 1:
+#             self.modstats['wisdom'] = 1
+#             self.features = features.raceFeatures(race='Dwarf',subRace='Hill Dwarf')
+#         elif dwarf_id == 2:
+#             self.modstats['strength'] = 2
+#             self.features = features.raceFeatures(race='Dwarf',subRace='Mountain Dwarf')
 
-        return
+#         return
 
 
 
