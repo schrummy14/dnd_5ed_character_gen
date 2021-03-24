@@ -45,7 +45,6 @@ class Atributes:
         else:
             # If you pass in atributes as a list
             for k,key in enumerate(self.values.keys()):
-                print(key,k)
                 self.values[key] = atributes[k]
         self.setModifiers()
 

@@ -7,7 +7,7 @@ b = player.Player()
 # Create a random character at level 1
 a.createRandom(1)
 # Create a dwarf fighter at level 1 with specific base atributes
-b.create('Dwarf','Fighter',level=1,atributes=[10,11,12,13,14,15])
+b.create('Tiefling','Fighter',level=1,atributes=[10,11,12,13,14,15])
 # Re roll atributes, reset level and level to 1
 a.atributes.rollAtributes(min_val=1,max_val=6)
 a.level = 0
