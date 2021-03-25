@@ -6,6 +6,7 @@ from Races.GenRace import GenRace
 
 class Dragonborn(GenRace):
     def __init__(self, subRace=None):
+        super(self.__class__, self).__init__()
         self.modstats = {
             'strength': 2,
             'charisma': 1

@@ -3,6 +3,7 @@ from Races.GenRace import *
 
 class HalfOrc(GenRace):
     def __init__(self, subRace=None):
+        super(self.__class__, self).__init__()
         self.modstats = {
             'strength': 2,
             'constitution': 1
