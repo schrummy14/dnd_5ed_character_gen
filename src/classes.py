@@ -18,7 +18,7 @@ class Classes:
         self.info = GenClass()
 
     def getRandom(self):
-        randClassId = randint(1,5)
+        randClassId = randint(1,12)
         if randClassId == 1:
             self.info = Barbarian()
         elif randClassId == 2:

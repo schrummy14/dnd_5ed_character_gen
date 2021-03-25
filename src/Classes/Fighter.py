@@ -3,6 +3,7 @@ from random import randint
 from Classes.GenClass import GenClass
 class Fighter(GenClass):
     def __init__(self):
+        super(Fighter, self).__init__()
         self.hitDie = rolls.d10
         self.className = "Fighter"
         if randint(1,2) == 1:

@@ -18,6 +18,14 @@ class Atributes:
             "wisdom": 0,
             "charisma": 0
         }
+        self.maxValue = {
+            "strength": 20,
+            "dexterity": 20,
+            "constitution": 20,
+            "intelligence": 20,
+            "wisdom": 20,
+            "charisma": 20
+        }
 
     def rollAtributes(self,min_val=1,max_val=6, maxAtributeValue=20, numberOfDice=4):
         self.values = {
@@ -45,7 +53,6 @@ class Atributes:
         else:
             # If you pass in atributes as a list
             for k,key in enumerate(self.values.keys()):
-                print(key,k)
                 self.values[key] = atributes[k]
         self.setModifiers()
 
@@ -53,3 +60,9 @@ class Atributes:
         keys = self.modifiers.keys()
         for key in keys:
             self.modifiers[key] = (self.values[key] - 10)//2
+
+
+    def addClassMods(self, classMods):
+        for key in self.values.keys():
+            self.maxValue[key] = 20+classMods[key]
+            self.values[key] = min(self.maxValue[key], self.values[key]+classMods[key])

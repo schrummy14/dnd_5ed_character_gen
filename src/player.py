@@ -66,8 +66,9 @@ class Player:
                 self.health += self.classes.info.hitDie()
 
             # Call class specific level ups
-            self.classes.info.levelUp()
-            if self.level % 4 == 0:
+            self.classes.info.levelUp(self.level)
+            self.atributes.addClassMods(self.classes.info.atributeValueMod)
+            if (self.level % 4 == 0 or self.level == 19) and self.level != 20:
                 for k in range(2):
                     atribute_name = self.chooseAtributeToIncrease()
                     print("increasing", atribute_name)
@@ -82,9 +83,13 @@ class Player:
         # for each class on how to choose the atribute.
         vals2increase = list()
         for key in self.atributes.modifiers.keys():
-            if self.atributes.values[key] < 20:
+            if self.atributes.values[key] < self.atributes.maxValue[key]:
                 vals2increase.append(key)
         if "constitution" in vals2increase:
             return "constitution"
         else:
             return vals2increase[0]
+
+
+    def getProfBonus(self):
+        return 2 + (self.level-1)//4

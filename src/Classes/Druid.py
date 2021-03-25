@@ -2,6 +2,7 @@ import rolls
 from Classes.GenClass import GenClass
 class Druid(GenClass):
     def __init__(self):
+        super(Druid, self).__init__()
         self.hitDie = rolls.d8
         self.className = "Druid"
         self.primaryAbility = "Wisdom"

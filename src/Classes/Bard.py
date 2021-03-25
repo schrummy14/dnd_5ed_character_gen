@@ -2,6 +2,7 @@ import rolls
 from Classes.GenClass import GenClass
 class Bard(GenClass):
     def __init__(self):
+        super(Bard, self).__init__()
         self.hitDie = rolls.d8
         self.className = "Bard"
         self.primaryAbility = "Charisma"
