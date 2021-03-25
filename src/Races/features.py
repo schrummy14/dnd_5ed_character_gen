@@ -86,8 +86,90 @@ _drow = {
                 darkness spell once per day. Charisma is your spellcasting ability for these spells.""", 
     'drowWeaponTraining' : """
     Drow Weapon Training: You have proficiency with rapiers, shortswords, and hand crossbows."""
-    }
+    }    
+_gnome = {
+    'darkvision': """
+    Darkvision: Accustomed to twilit forests and the night sky, you have superior vision in dark 
+                and dim conditions. You can see in dim light within 60 feet of you as if it were
+                bright light, and in darkness as if it were dim light. You can't discern color in
+                darkness, only shades of gray.""",
+    'gnomeCunning': """
+    Gnome Cunning: You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."""
+                }
+_forestGnome = {
+    'naturalIllusionist': """
+    Natural Illusionist: You know the minor illusion cantrip. Intelligence is your spellcasting ability for it.""",
+    'speakWithSmallBeasts': """
+    Speak With Small Beasts: Through sounds and gestures, you can communicate simple ideas with Small 
+    or smaller beasts. Forest gnomes love animals and often keep squirrels, badgers, rabbits, moles, 
+    woodpeckers, and other creatures as beloved pets."""}
     
+_rockGnome = {
+    'artificersLore': """
+    Artificer's Lore: Whenever you make an Intelligence (History) check related to magic items, alchemical 
+    objects, or technological devices, you can add twices your proficiecy bonus, instead of any proficiency bonus
+    you normally apply. """,
+    'tinker': """
+    Tinker: You have proficiency with artisan's tools (tinker's tools). Using those tools, you can spend 1 hour 
+    and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function 
+    after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your 
+    action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three 
+    such devices active at a time. 
+    See PHB pg 37 for options."""
+    }
+_halfling = {
+    'lucky': """
+    Lucky: When you roll a 1 on an attack roll, ability check, or saving throw, you can reroll the die and must
+    use the new roll.""",
+    'brave': """
+    Brave: You have advantage on saving throws against being frightened.""",
+    'halflingNimbleness': """
+    Halfling Nimbleness: You can move through the space of any creature that is of a size larger than yours."""}
+_lightfoot = {
+    'naturallyStealthy': """
+    Naturally Stealthy: You can attempt to hide even when you are obscured only by a creature that is at least one 
+                        size larger than you."""}
+_stout = {
+    'stoutResilience': """
+    You have advantage on saving throws against poison, and you have resistance against poison damage."""}
+_halfElf = {
+    'darkvision': """
+    Darkvision: Accustomed to twilit forests and the night sky, you have superior vision in dark 
+                and dim conditions. You can see in dim light within 60 feet of you as if it were
+                bright light, and in darkness as if it were dim light. You can't discern color in
+                darkness, only shades of gray.""",
+    'feyAncestry' : """
+    You have advantage on saving throws against being charmed, and magic can't put you to sleep.""",
+    'skillVersatility': """
+    Skill Versatility: You gain proficiency in two skills of your choice."""}
+_halfOrc = {
+    'darkvision': """
+    Darkvision: Accustomed to twilit forests and the night sky, you have superior vision in dark 
+                and dim conditions. You can see in dim light within 60 feet of you as if it were
+                bright light, and in darkness as if it were dim light. You can't discern color in
+                darkness, only shades of gray.""",
+    'menacing': """
+    Menacing: You gain proficiency in the intimidate skill.""",
+    'relentlessEndurance': """
+    Relentless Endurance: When you are reduced to 0 hit points but not killed outright, you can drop 
+    to 1 hit point instead. You can't use this feature again until you finish a long rest.""",
+    'savageAttacks': """
+    Savage Attacks: When you score a critical hit with a melee weapon attack, you can roll one of the weapon's
+    damage dice one additional time and add it to the extra damage of the critical hit."""
+    }
+_tiefling = {
+    'darkvision': """
+    Darkvision: Accustomed to twilit forests and the night sky, you have superior vision in dark 
+                and dim conditions. You can see in dim light within 60 feet of you as if it were
+                bright light, and in darkness as if it were dim light. You can't discern color in
+                darkness, only shades of gray.""",
+    'hellishResistance': """
+    Hellish Resistance: You have resistance to fire damage.""",
+    'infernalLegacy': """
+    Infernal Legacy: You know the thaumaturgy cantrip. Once you reach 3rd level, you can cast the hellish rebuke 
+    spell once per day as a 2nd-level spell. Once you reach 5th level, you can also cast the darkness spell once 
+    per day. Charisma is your spellcasting ability for these spells."""}
+
 _features = {
     "Dwarf": _dwarf,
     "Hill Dwarf": _hillDwarf,
@@ -95,7 +177,18 @@ _features = {
     "Elf": _elf,
     "High Elf": _highElf,
     "Wood Elf": _woodElf,
-    "Drow": _drow
+    "Drow": _drow,
+    "Gnome": _gnome,
+    "Forest Gnome": _forestGnome,
+    "Rock Gnome": _rockGnome,
+    "Halfling": _halfling,
+    "Lightfoot": _lightfoot,
+    "Stout": _stout,
+    "Half Elf": _halfElf,
+    "Half Orc": _halfOrc,
+    "Tiefling": _tiefling
+    
+    
 }
 
 def raceFeatures(race,subRace):

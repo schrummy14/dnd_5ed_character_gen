@@ -5,7 +5,6 @@ import features
 a = player.Player()
 # Create a random character at level 1
 a.createRandom(1)
-
 # Re roll atributes, reset level and level to 1
 a.atributes.rollAtributes(min_val=3,max_val=6)
 a.level = 0
