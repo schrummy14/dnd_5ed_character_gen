@@ -4,12 +4,12 @@ import features
 
 a = player.Player()
 # Create a random character at level 1
-a.createRandom(1)
-
+# a.createRandom(1)
+a.create(race='Dwarf', className='Bard',atributes=[12,13,15,12,12,18])
 # Re roll atributes, reset level and level to 1
-a.atributes.rollAtributes(min_val=3,max_val=6)
-a.level = 0
-a.levelUp(1)
+#a.atributes.rollAtributes(min_val=3,max_val=6)
+#a.level = 0
+#a.levelUp(1)
 
 print("race:", a.races.info.features['race'])
 print("sub race:", a.races.info.features['subRace'])
@@ -32,4 +32,11 @@ print("Current Health:", a.health)
 print(a.atributes.values)
 print(a.atributes.modifiers)
 
+print("Class Features")
+for key in sorted(a.classes.info.classFeatures):
+    print('\t' + key)
+
+print("Skills")
+for key in a.skills.keys():
+    print('\t', key, a.skills[key])
 print("\n")
