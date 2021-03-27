@@ -1,2 +1,5 @@
+.spyproject
 .vscode
 src/__pycache__
+src/Classes/__pycache__
+src/Races/__pycache__
