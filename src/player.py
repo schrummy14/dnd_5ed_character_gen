@@ -11,7 +11,7 @@ class Player:
     def __init__(self):
         self.health = 0
         self.atributes = atributes.Atributes()
-        self.skills = skills.Skills()
+        self.skills = dict()
         self.races = races.Races()
         self.classes = classes.Classes()
         self.level = 0
@@ -75,6 +75,10 @@ class Player:
                     self.atributes.values[atribute_name] += 1
         self.atributes.setModifiers()
         self.health += self.level*self.atributes.modifiers["constitution"]
+        self.proficiencyBonus = self.classes.info.getProfBonus(self.level)
+        # Update skills
+        for key in self.classes.info.skills.keys():
+            self.skills[key] = self.classes.info.skills[key] + self.atributes.modifiers[skills.skill2atribute[key]]
     
     def chooseAtributeToIncrease(self):
         # Here is where we can add logic to better choose how and when an atribute increases.
@@ -89,7 +93,3 @@ class Player:
             return "constitution"
         else:
             return vals2increase[0]
-
-
-    def getProfBonus(self):
-        return 2 + (self.level-1)//4

@@ -1,5 +1,5 @@
 import rolls
-from random import randint
+from random import randint, sample
 from Classes.GenClass import GenClass
 class Barbarian(GenClass):
     def __init__(self, extra=None): # Extra sets the primal path
@@ -51,6 +51,7 @@ class Barbarian(GenClass):
         if level == 1:
             self.classFeatures.append('Unarmored Defense')
             self.acMod = ['dexterity', 'constitution']
+            self.pickSkills()
         elif level == 2:
             self.classFeatures.append('Reckless Attack')
             self.classFeatures.append('Danger Sense')
@@ -124,4 +125,8 @@ class Barbarian(GenClass):
 
     def levelUp(self, level):
         self.getFeatures(level)
-        pass
+        self.updateSkills(level)
+
+    def pickSkills(self):
+        stats = ['animal handling', 'athletics', 'intimidation', 'nature', 'perception', 'survival']
+        self.profSkills = sample(stats,2)
