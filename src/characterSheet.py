@@ -15,13 +15,17 @@ def createCharacterSheet(player, outFileName="document-output.pdf"):
     output.addPage(input1.getPage(2))
 
     newVals = dict()
+    gg = input1.getFormTextFields()
+    for k,key in enumerate(gg):
+        newVals[key] = "(%d)" % (k)
+    #     print("%d: \"%s\"," % (k, key))
     newVals.update(_setClassLevel(player))
     newVals.update(_setRaceName(player))
     newVals.update(_setAtributes(player))
     newVals.update(_setAC(player))
     newVals.update(_setSkills(player))
-    for k in newVals.keys():
-        print("%s: %s" % (k, newVals[k]))
+    # for k in newVals.keys():
+    #     print("%s: %s" % (k, newVals[k]))
 
     output.updatePageFormFieldValues(input1.getPage(0), newVals)
     output.updatePageFormFieldValues(input1.getPage(1), newVals)
@@ -40,6 +44,7 @@ def _setSkills(player):
     vals = dict()
     for key in skill2atribute.keys():
         vals[_num2field[_skills2num[key]]] = str(player.skills[key])
+    vals[_num2field[79]] = str(player.skills['perception'] + 10)
     return vals
 
 
@@ -131,7 +136,7 @@ _num2field = {
     13: "Background",
     14: "PlayerName",
     15: "CharacterName",
-    16: "Race",
+    16: "Race ",
     17: "Alignment",
     18: "XP",
     19: "Inspiration",
@@ -140,14 +145,14 @@ _num2field = {
     22: "AC",
     23: "Initiative",
     24: "Speed",
-    25: "PersonalityTraits",
+    25: "PersonalityTraits ",
     26: "STRmod",
     27: "HPMax",
     28: "ST Strength",
     29: "DEX",
     30: "HPCurrent",
     31: "Ideals",
-    32: "DEXmod",
+    32: "DEXmod ",
     33: "HPTemp",
     34: "Bonds",
     35: "CON",
@@ -164,8 +169,8 @@ _num2field = {
     46: "Acrobatics",
     47: "Animal",
     48: "Athletics",
-    49: "Deception",
-    50: "History",
+    49: "Deception ",
+    50: "History ",
     51: "Insight",
     52: "Intimidation",
     53: "Wpn Name",
@@ -173,22 +178,22 @@ _num2field = {
     55: "Wpn1 Damage",
     56: "INTmod",
     57: "Wpn Name 2",
-    58: "Wpn2 AtkBonus",
-    59: "Wpn2 Damage",
-    60: "Investigation",
+    58: "Wpn2 AtkBonus ",
+    59: "Wpn2 Damage ",
+    60: "Investigation ",
     61: "WIS",
     62: "Wpn Name 3",
-    63: "Wpn3 AtkBonus ",
+    63: "Wpn3 AtkBonus  ",
     64: "Arcana",
-    65: "Wpn3 Damage",
-    66: "Perception",
+    65: "Wpn3 Damage ",
+    66: "Perception ",
     67: "WISmod",
     68: "CHA",
     69: "Nature",
     70: "Performance",
     71: "Medicine",
     72: "Religion",
-    73: "Stealth",
+    73: "Stealth ",
     74: "Persuasion",
     75: "SleightofHand",
     76: "CHamod",
