@@ -1,6 +1,7 @@
 import player
 import classes
 import features
+import characterSheet
 
 a = player.Player()
 # Create a random character at level 1
@@ -40,3 +41,5 @@ print("Skills")
 for key in a.skills.keys():
     print('\t', key, a.skills[key])
 print("\n")
+
+characterSheet.createCharacterSheet(a,'test.pdf')

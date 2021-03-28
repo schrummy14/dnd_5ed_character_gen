@@ -6,10 +6,11 @@ import classes
 import atributes
 import features
 
-
 class Player:
     def __init__(self):
         self.health = 0
+        self.maxHealth = 0
+        self.tempHealth = 0
         self.atributes = atributes.Atributes()
         self.skills = dict()
         self.races = races.Races()
@@ -19,6 +20,7 @@ class Player:
         self.ac = 0
         self.proficiencyBonus = 0
         self.alignment = None
+        self.initiative = 0
 
     def create(self, race, className, level=1, subrace=None, atributes=None):
         self.level = 0
@@ -58,12 +60,16 @@ class Player:
     def levelUp(self, newLevel):
         if self.level > 1:
             self.health -= self.level*self.atributes.modifiers["constitution"]
+            self.maxHealth -= self.level*self.atributes.modifiers["constitution"]
         while self.level < newLevel:
             self.level += 1
             if self.level == 1:
                 self.health = classes._HitDie[self.classes.info.className]
+                self.maxHealth = classes._HitDie[self.classes.info.className]
             else:
-                self.health += self.classes.info.hitDie()
+                dieRoll = self.classes.info.hitDie()
+                self.health += dieRoll
+                self.maxHealth += dieRoll
 
             # Call class specific level ups
             self.classes.info.levelUp(self.level)
@@ -75,7 +81,10 @@ class Player:
                     self.atributes.values[atribute_name] += 1
         self.atributes.setModifiers()
         self.health += self.level*self.atributes.modifiers["constitution"]
+        self.maxHealth += self.level*self.atributes.modifiers["constitution"]
         self.proficiencyBonus = self.classes.info.getProfBonus(self.level)
+        self.ac = 10 + self.atributes.modifiers['dexterity']
+        self.initiative = self.atributes.modifiers['dexterity']
         # Update skills
         for key in self.classes.info.skills.keys():
             self.skills[key] = self.classes.info.skills[key] + self.atributes.modifiers[skills.skill2atribute[key]]
