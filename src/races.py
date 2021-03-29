@@ -16,7 +16,7 @@ class Races:
         self.info = GenRace()
 
     def getRandom(self):
-        race_id = randint(1,1)
+        race_id = randint(1,9)
         if race_id == 1:
             self.info = Elf()
         elif race_id == 2:
@@ -36,7 +36,7 @@ class Races:
         elif race_id == 9:
             self.info = HalfOrc()
     
-    def setRace(self, race, subRace=None):
+    def setRace(self, race, subRace="None"):
         self.info = _Races[race](subRace)
 
 _Races = {

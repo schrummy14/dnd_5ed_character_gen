@@ -1,6 +1,9 @@
 import os
 from skills import skill2atribute
 from PyPDF2 import PdfFileWriter, PdfFileReader
+import PyPDF2.generic
+import PyPDF2.pdf
+import PyPDF2.utils
 
 def createCharacterSheet(player, outFileName="document-output.pdf"):
     inFile = open("characterSheet" + os.sep + "blank.pdf", 'rb')
@@ -24,9 +27,10 @@ def createCharacterSheet(player, outFileName="document-output.pdf"):
     newVals.update(_setAtributes(player))
     newVals.update(_setAC(player))
     newVals.update(_setSkills(player))
+    newVals.update(_setFeatures(player))
+    newVals.update(_setSpells(player))
     # for k in newVals.keys():
     #     print("%s: %s" % (k, newVals[k]))
-
     output.updatePageFormFieldValues(input1.getPage(0), newVals)
     output.updatePageFormFieldValues(input1.getPage(1), newVals)
     output.updatePageFormFieldValues(input1.getPage(2), newVals)
@@ -39,6 +43,44 @@ def createCharacterSheet(player, outFileName="document-output.pdf"):
 
 def readCharacterSheet(fileName, inFileName="document-output.pdf"):
     pass
+
+def _setSpells(player):
+    vals = dict()
+    curStr = list()
+    for k in range(10):
+        curStr.append(list())
+    for key in player.spells.keys():
+        spellName = key.title()
+        spellLevel = int(player.spells[key]['level'])
+        spellLocation = player.spells[key]['location']
+        spellRange = player.spells[key]['range'].title()
+        spellDice = player.spells[key]['dice']
+        if spellDice is None:
+            curStr[spellLevel].append("%s: %s [%s]" % (spellName, spellRange, spellLocation))
+        else:
+            curStr[spellLevel].append("%s: %s, %s [%s]" % (spellName, spellRange, spellDice, spellLocation))
+    for k in range(10):
+        if k > 0:
+            numSpells = player.spellStructure[k+1]
+            if numSpells == 0:
+                continue
+            vals[_num2field[_spellSlot2field[k]]] = str(numSpells)
+        for kk, spell in enumerate(curStr[k]):
+            vals[_num2field[_spell2field[k][kk]]] = spell
+        
+    return vals
+
+def _setFeatures(player):
+    vals = dict()
+    curStr = list()
+    curStr.append("")
+    curStr.append("")
+    for k, feat in enumerate(player.features):
+        curStrId = 0*(k<=20) + 1*(k>20)
+        curStr[curStrId] += "* " + feat + '\n'
+    vals[_num2field[87]] = curStr[0][:-1]
+    vals[_num2field[10]] = curStr[1][:-1]
+    return vals
 
 def _setSkills(player):
     vals = dict()
@@ -56,6 +98,9 @@ def _setAC(player):
         _num2field[27]: str(player.maxHealth),
         _num2field[30]: str(player.health),
         _num2field[33]: str(player.tempHealth),
+        _num2field[21]: str(player.proficiencyBonus),
+        _num2field[36]: str(player.level),
+        _num2field[38]: str(player.level)
     }
 
 def _setClassLevel(player):
@@ -65,11 +110,11 @@ def _setClassLevel(player):
 
 def _setRaceName(player):
     curStr = "%s" % (player.races.info.features['race'])
-    if player.races.info.features['subRace'] != "None":
+    if player.races.info.features['subRace'] != "None" and not player.races.info.features['subRace'] is None:
         curStr += " (%s)" % (player.races.info.features['subRace'])
     return {
         _num2field[16]: curStr
-        }
+    }
 
 def _setAtributes(player):
     vals = dict()
@@ -98,6 +143,21 @@ _name2num = {
     "charisma_mod": 76
 }
 
+_spell2field = {
+    0: [94,96,97,98,99,100,101,102],
+    1: [95,103,104,105,106,107,108,109,110,111,112,113],
+    2: [128,116,117,118,119,120,121,122,123,124,125,126,127],
+    3: [132,131,133,134,135,136,137,138,139,140,141,142,143],
+    4: [147,146,148,149,150,151,152,153,154,155,156,157,158],
+    5: [162,161,163,164,165,166,167,168,169],
+    6: [173,172,174,175,176,177,178,179,180],
+    7: [184,183,185,186,187,188,189,190,191],
+    8: [195,194,196,197,198,199,200],
+    9: [204,203,205,206,207,208,209]
+}
+
+_spellSlot2field = [-1, 92, 114, 129, 144, 159, 170, 181, 192, 201]
+
 _skills2num = {
     "acrobatics": 46,
     "animal handling": 47,
@@ -120,6 +180,7 @@ _skills2num = {
 }
 
 _num2field = {
+    -1: "Empty",
     0: "CharacterName 2",
     1: "Age",
     2: "Height",

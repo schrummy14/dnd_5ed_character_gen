@@ -17,9 +17,6 @@ class Bard(GenClass):
         else:
             self.collegePath = extra
 
-    def getSpells(self, level):
-        pass
-
     def getFeatures(self, level):
         if level == 1:
             self.classFeatures.append('Spellcasting')
@@ -128,4 +125,36 @@ class Bard(GenClass):
         self.getSpells(level)
         self.updateSkills(level)
         self.updateJAT(level)
+    
+    def getSpells(self, level):
+        if level == 1:
+            self.spellStructure = _bardSpells[1]
+            return
+        newAddition = _bardSpells[level]
+        for k in range(len(newAddition)):
+            self.spellStructure[k] += newAddition[k]
 
+_bardSpells = {
+    # Each row is the increase in the number
+    #l: [0  #  1  2  3  4  5  6  7  8  9]
+     1: [2, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+     2: [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+     3: [0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0],
+     4: [1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+     5: [0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+     6: [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+     7: [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+     8: [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+     9: [0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+    10: [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    11: [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    12: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    13: [0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    14: [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    15: [0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    16: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    17: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    18: [0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+    19: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+    20: [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+}

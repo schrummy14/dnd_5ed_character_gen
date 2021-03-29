@@ -21,6 +21,8 @@ class Player:
         self.proficiencyBonus = 0
         self.alignment = None
         self.initiative = 0
+        self.features = list()
+        self.spells = dict()
 
     def create(self, race, className, level=1, subrace=None, atributes=None):
         self.level = 0
@@ -77,6 +79,8 @@ class Player:
             if (self.level % 4 == 0 or self.level == 19) and self.level != 20:
                 for k in range(2):
                     atribute_name = self.chooseAtributeToIncrease()
+                    if atribute_name is None:
+                        break
                     print("increasing", atribute_name)
                     self.atributes.values[atribute_name] += 1
         self.atributes.setModifiers()
@@ -85,10 +89,34 @@ class Player:
         self.proficiencyBonus = self.classes.info.getProfBonus(self.level)
         self.ac = 10 + self.atributes.modifiers['dexterity']
         self.initiative = self.atributes.modifiers['dexterity']
+        self.updateFeatures()
+        self.updateSpells()
         # Update skills
         for key in self.classes.info.skills.keys():
             self.skills[key] = self.classes.info.skills[key] + self.atributes.modifiers[skills.skill2atribute[key]]
     
+    def updateFeatures(self):
+        vals = list()
+        # Get Race Features
+        for key in self.races.info.features["features"].keys():
+            curStr = self.races.info.features["features"][key]
+            curStr_split = curStr.split(':')
+            curStr_strip = curStr_split[0].strip()
+            vals.append(curStr_strip)
+        # Get Class Features
+        for key in self.classes.info.classFeatures:
+            vals.append(key)
+        self.features = vals
+    
+    def updateSpells(self):
+        # Get Class Spells
+        for key in self.classes.info.spells.keys():
+            self.spells[key] = self.classes.info.spells[key]
+        
+        # Update spell structure
+        self.spellStructure = self.classes.info.spellStructure # Plus others
+
+
     def chooseAtributeToIncrease(self):
         # Here is where we can add logic to better choose how and when an atribute increases.
         # Right now it prioritizes con, after that it goes in atribute order (str->dex->...).
@@ -101,4 +129,7 @@ class Player:
         if "constitution" in vals2increase:
             return "constitution"
         else:
-            return vals2increase[0]
+            if len(vals2increase) > 0:
+                return vals2increase[0]
+            else:
+                return None

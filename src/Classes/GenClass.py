@@ -27,7 +27,9 @@ class GenClass:
         self.skills = dict()
         for key in skill2atribute.keys():
             self.skills[key] = 0
-        self.spells = list()
+        self.spells = dict()
+        self.spellStructure = list()
+        self.extraLanguages = 0
 
     def levelUp(self, level):
         pass

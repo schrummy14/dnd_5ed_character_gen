@@ -45,7 +45,7 @@ _elf = {
     Keen Senses: You have proficiency in the perception skill.""",
 
     'feyAncestry' : """
-    You have advantage on saving throws against being charmed, and magic can't put you to sleep.""",
+    Fey Ancestry: You have advantage on saving throws against being charmed, and magic can't put you to sleep.""",
 
     'trance' : """
     Trance: Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for
@@ -56,7 +56,7 @@ _elf = {
     }
 _highElf = {
     'elfWeaponTraining' : """
-    You have proficiency with the longsword, shortsowrd, shortbow, and longbow.""", 
+    Elf Weapon Training: You have proficiency with the longsword, shortsowrd, shortbow, and longbow.""", 
     'cantrip' : """
     Cantrip: You know one cantrip of your choice from the wizard spell list. Intelligence is your
              spellcasting ability for it.""",
@@ -66,11 +66,11 @@ _highElf = {
     }
 _woodElf = {
     'elfWeaponTraining' : """
-    You have proficiency with the longsword, shortsowrd, shortbow, and longbow.""", 
+    Elf Weapon Training: You have proficiency with the longsword, shortsowrd, shortbow, and longbow.""", 
     'fleetOfFoot' : """
-    Your base walking speed increases to 35 feet.""", 
+    Fleet Of Foot: Your base walking speed increases to 35 feet.""", 
     'maskOfTheWild' : """
-    You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling
+    Mask Of The Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling
     snow, mist, and other natural phenomena."""
     }
 _drow = {
@@ -131,7 +131,7 @@ _lightfoot = {
                         size larger than you."""}
 _stout = {
     'stoutResilience': """
-    You have advantage on saving throws against poison, and you have resistance against poison damage."""}
+    Stout Resilience: You have advantage on saving throws against poison, and you have resistance against poison damage."""}
 _halfElf = {
     'darkvision': """
     Darkvision: Accustomed to twilit forests and the night sky, you have superior vision in dark 
@@ -139,7 +139,7 @@ _halfElf = {
                 bright light, and in darkness as if it were dim light. You can't discern color in
                 darkness, only shades of gray.""",
     'feyAncestry' : """
-    You have advantage on saving throws against being charmed, and magic can't put you to sleep.""",
+    Fey Ancestry: You have advantage on saving throws against being charmed, and magic can't put you to sleep.""",
     'skillVersatility': """
     Skill Versatility: You gain proficiency in two skills of your choice."""}
 _halfOrc = {
@@ -206,6 +206,10 @@ def raceFeatures(race,subRace):
     keys = subFeatures.keys()
     for key in keys:
         features[key] = subFeatures[key]
+
+    # Check if superior darkvision is present and remove darkvision
+    if 'superiorDarkvision' in features:
+        features.pop('darkvision', None)
     val["features"] = features
     return val
 
