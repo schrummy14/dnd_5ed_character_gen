@@ -111,7 +111,7 @@ class Cleric(GenClass):
         if level == 1:
             curSpells = self.spells.keys()
             if not "light" in curSpells:
-                self.spells.update(getSpell('light'))
+                self.spells.update(getSpell('Light'))
 
             self.classFeatures.append(f + "Warding Flare")
         elif level == 2:
