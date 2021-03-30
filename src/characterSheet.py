@@ -10,11 +10,9 @@ def createCharacterSheet(player, outFileName="document-output.pdf"):
     input1 = PdfFileReader(inFile)
     output = PdfFileWriter()
 
-    # add page 1
+    # Add pages
     output.addPage(input1.getPage(0))
-    # add page 2
     output.addPage(input1.getPage(1))
-    # add page 3
     output.addPage(input1.getPage(2))
 
     newVals = dict()
@@ -29,8 +27,8 @@ def createCharacterSheet(player, outFileName="document-output.pdf"):
     newVals.update(_setSkills(player))
     newVals.update(_setFeatures(player))
     newVals.update(_setSpells(player))
-    # for k in newVals.keys():
-    #     print("%s: %s" % (k, newVals[k]))
+
+    # Update fields with new values
     output.updatePageFormFieldValues(input1.getPage(0), newVals)
     output.updatePageFormFieldValues(input1.getPage(1), newVals)
     output.updatePageFormFieldValues(input1.getPage(2), newVals)
