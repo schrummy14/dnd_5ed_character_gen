@@ -1,4 +1,5 @@
 import rolls
+import spells
 from random import randint, sample
 from Classes.GenClass import GenClass
 class Bard(GenClass):
@@ -125,11 +126,13 @@ class Bard(GenClass):
         self.getSpells(level)
         self.updateSkills(level)
         self.updateJAT(level)
-    
+
     def getSpells(self, level):
         if level == 1:
+            self.getNewSpells(_bardSpells[1], 'bard')
             self.spellStructure = _bardSpells[1]
             return
+        self.getNewSpells(_bardSpells[level], 'bard')
         newAddition = _bardSpells[level]
         for k in range(len(newAddition)):
             self.spellStructure[k] += newAddition[k]

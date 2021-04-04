@@ -1,3 +1,4 @@
+import spells
 from random import randint
 from skills import skill2atribute
 class GenClass:
@@ -34,6 +35,22 @@ class GenClass:
     def levelUp(self, level):
         pass
     
+    def getFeatures(self, level):
+        pass
+
+    def getNewSpells(self, extraSpells, className):
+        for lvl in range(len(extraSpells)):
+            if lvl == 1:
+                continue
+            for k in range(extraSpells[lvl]):
+                while True:
+                    newSpell = spells.getRandomSpell(max(0, lvl-1), className)
+                    spellName, spellContents = list(newSpell.items())[0]
+                    if spellName in self.spells.keys():
+                        continue
+                    self.spells.update(newSpell)
+                    break
+
     def pickSkills(self):
         pass
 

@@ -300,20 +300,18 @@ class Cleric(GenClass):
 
     def pickSkills(self):
         self.profSkills = ["religion", sample(["history", "insight", "medicine", "persuasion"],1)[0]]
-        
-
-    def getSpells(self, level):
-        pass
 
     def levelUp(self, level):
         self.getFeatures(level)
         self.getSpells(level)
         self.updateSkills(level)
-    
+
     def getSpells(self, level):
         if level == 1:
+            self.getNewSpells(_clericSpells[1], 'cleric')
             self.spellStructure = _clericSpells[1]
             return
+        self.getNewSpells(_clericSpells[level], 'cleric')
         newAddition = _clericSpells[level]
         for k in range(len(newAddition)):
             self.spellStructure[k] += newAddition[k]
