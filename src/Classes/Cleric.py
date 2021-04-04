@@ -1,5 +1,5 @@
 import rolls
-from spells import getSpell
+from spells import getSpell, getRandomSpell
 from random import randint, sample
 from Classes.GenClass import GenClass
 class Cleric(GenClass):
@@ -31,16 +31,16 @@ class Cleric(GenClass):
         elif level == 2:
             self.cd_id = len(self.classFeatures)
             self.classFeatures.append("Channel Divinity (1/rest)")
-            self.divineDomainFeature(level)
+            
         elif level == 5:
             self.du_id = len(self.classFeatures)
             self.classFeatures.append("Destroy Undead (CR 1/2)")
         elif level == 6:
             self.classFeatures[self.cd_id] = "Channel Divinity (2/rest)"
-            self.divineDomainFeature(level)
+            
         elif level == 8:
             self.classFeatures[self.du_id] = "Destroy Undead (CR 1)"
-            self.divineDomainFeature(level)
+            
         elif level == 10:
             self.di_id = len(self.classFeatures)
             self.classFeatures.append("Divine Intervention")
@@ -50,16 +50,16 @@ class Cleric(GenClass):
             self.classFeatures[self.du_id] = "Destroy Undead (CR 3)"
         elif level == 17:
             self.classFeatures[self.du_id] = "Destroy Undead (CR 4)"
-            self.divineDomainFeature(level)
         elif level == 18:
             self.classFeatures[self.cd_id] = "Channel Divinity (3/rest)"
         elif level == 20:
-
             self.classFeatures[self.di_id] = "Divine Intervention [Improvement]"
+        if level > 1:
+            self.divineDomainFeature(level)
 
     def getDivineDomain(self):
         if self.divineDomain is None:
-            self.divineDomain = "Light" # sample(["Knowledge", "Life", "Light", "Nature", "Tempest", "Trickery", "War"], 1)[0]
+            self.divineDomain = sample(["Knowledge", "Life", "Light", "Nature", "Tempest", "Trickery", "War"], 1)[0]
         self.divineDomainFeature(1)
 
     def divineDomainFeature(self, level):
@@ -81,14 +81,28 @@ class Cleric(GenClass):
     def getKnowledgeDomainFeature(self, level):
         if level == 1:
             self.classFeatures.append("Knowledge Domain: Blessings of Knowledge")
-            self.addSkills()
+            self.addSkills("Knowledge")
             self.extraLanguages += 2
+            self.spells.update(getSpell("Command"))
+            self.spells.update(getSpell("Identify"))
         elif level == 2:
             self.classFeatures.append("Knowledge Domain: Channel Divinity (Knowledge of the Ages)")
+        elif level == 3:
+            self.spells.update(getSpell("Augury"))
+            self.spells.update(getSpell("Suggestion"))
+        elif level == 5:
+            self.spells.update(getSpell("Nondetection"))
+            self.spells.update(getSpell("Speak with Dead"))
         elif level == 6:
             self.classFeatures.append("Knowledge Domain: Channel Divinity (Read Thoughts)")
+        elif level == 7:
+            self.spells.update(getSpell("Arcane Eye"))
+            self.spells.update(getSpell("Confusion"))
         elif level == 8:
             self.classFeatures.append("Knowledge Domain: Potent Spellcasting")
+        elif level == 9:
+            self.spells.update(getSpell("Command"))
+            self.spells.update(getSpell("Identify"))
         elif level == 17:
             self.classFeatures.append("Knowledge Domain: Visions of the Past")
 
@@ -97,12 +111,26 @@ class Cleric(GenClass):
         if level == 1:
             self.armorWeaponProficiencies.append("Heavy Armor")
             self.classFeatures.append(f + "Disciple of Life")
+            self.spells.update(getSpell("Bless"))
+            self.spells.update(getSpell("Cure Wounds"))
         elif level == 2:
             self.classFeatures.append(f + "Channel Divinity (Preserve Life)")
+        elif level == 3:
+            self.spells.update(getSpell("Lesser Restoration"))
+            self.spells.update(getSpell("Spiritual Weapon"))
+        elif level == 5:
+            self.spells.update(getSpell("Beacon of Hope"))
+            self.spells.update(getSpell("Revivify"))
         elif level == 6:
             self.classFeatures.append(f + "Blessed Healer")
+        elif level == 7:
+            self.spells.update(getSpell("Death Ward"))
+            self.spells.update(getSpell("Guardian of Faith"))
         elif level == 8:
             self.classFeatures.append(f + "Divine Strike")
+        elif level == 9:
+            self.spells.update(getSpell("Mass Cure Wounds"))
+            self.spells.update(getSpell("Raise Dead"))
         elif level == 17:
             self.classFeatures.append(f + "Supreme Healing")
 
@@ -112,37 +140,163 @@ class Cleric(GenClass):
             curSpells = self.spells.keys()
             if not "light" in curSpells:
                 self.spells.update(getSpell('Light'))
-
             self.classFeatures.append(f + "Warding Flare")
+            self.spells.update(getSpell("Burning Hands"))
+            self.spells.update(getSpell("Faerie Fire"))
         elif level == 2:
             self.classFeatures.append(f + "Channel Divinity (Radiance of the Dawn)")
+        elif level == 3:
+            self.spells.update(getSpell("Flaming Sphere"))
+            self.spells.update(getSpell("Scorching Ray"))
+        elif level == 5:
+            self.spells.update(getSpell("Daylight"))
+            self.spells.update(getSpell("Fireball"))
         elif level == 6:
             self.classFeatures.append(f + "Improved Flare")
+        elif level == 7:
+            self.spells.update(getSpell("Guardian of Faith"))
+            self.spells.update(getSpell("Wall of Fire"))
         elif level == 8:
             self.classFeatures.append(f + "Potent Spellcasting")
+        elif level == 9:
+            self.spells.update(getSpell("Flame Strike"))
+            self.spells.update(getSpell("Scrying"))
         elif level == 17:
             self.classFeatures.append(f + "Corona of Light")
 
     def getNatureDomainFeature(self, level):
-        pass
+        f = "Nature Domain: "
+        if level == 1:
+            self.armorWeaponProficiencies.append("Heavy Armor")
+            self.addSkills("Nature")
+            self.spells.update(getRandomSpell(0,'druid'))
+            self.spells.update(getSpell("Animal Friendship"))
+            self.spells.update(getSpell("Speak with Animals"))
+        elif level == 2:
+            self.classFeatures.append(f + "Channel Divinity (Charm Animals and Plants)")
+        elif level == 3:
+            self.spells.update(getSpell("Barkskin"))
+            self.spells.update(getSpell("Spike Growth"))
+        elif level == 5:
+            self.spells.update(getSpell("Plant Growth"))
+            self.spells.update(getSpell("Wind Wall"))
+        elif level == 6:
+            self.classFeatures.append(f + "Damben Elements")
+        elif level == 7:
+            self.spells.update(getSpell("Dominate Beast"))
+            self.spells.update(getSpell("Grasping Vine"))
+        elif level == 8:
+            self.classFeatures.append(f + "Divine Strike")
+        elif level == 9:
+            self.spells.update(getSpell("Insect Plague"))
+            self.spells.update(getSpell("Tree Stride"))
+        elif level == 17:
+            self.classFeatures.append(f + "Master of Nature")
 
     def getTempestDomainFeature(self, level):
-        pass
+        f = "Tempest Domain: "
+        if level == 1:
+            self.armorWeaponProficiencies.append("Martial Weapons")
+            self.armorWeaponProficiencies.append("Heavy Armor")
+            self.spells.update(getSpell("Fog Cloud"))
+            self.spells.update(getSpell("Thunderwave"))
+        elif level == 2:
+            self.classFeatures.append(f + "Channel Divinity (Destructive Wrath)")
+        elif level == 3:
+            self.spells.update(getSpell("Gust of Wind"))
+            self.spells.update(getSpell("Shatter"))
+        elif level == 5:
+            self.spells.update(getSpell("Call Lightning"))
+            self.spells.update(getSpell("Sleet Storm"))
+        elif level == 6:
+            self.classFeatures.append(f + "Thunderbolt Strike")
+        elif level == 7:
+            self.spells.update(getSpell("Control Water"))
+            self.spells.update(getSpell("Ice Storm"))
+        elif level == 8:
+            self.classFeatures.append(f + "Divine Strike")
+        elif level == 9:
+            self.spells.update(getSpell("Destructive Wave"))
+            self.spells.update(getSpell("Insect Plague"))
+        elif level == 17:
+            self.classFeatures.append(f + "Stormborn")
+
 
     def getTrickeryDomainFeature(self, level):
-        pass
+        f = "Trickery Domain: "
+        if level == 1:
+            self.classFeatures.append(f + 'Blessing of the Trickster')
+            self.spells.update(getSpell("Charm Person"))
+            self.spells.update(getSpell("Disguise Self"))
+        elif level == 2:
+            self.classFeatures.append(f + "Channel Divinity (Invoke Buplicity)")
+        elif level == 3:
+            self.spells.update(getSpell("Mirror Image"))
+            self.spells.update(getSpell("Pass without Trace"))
+        elif level == 5:
+            self.spells.update(getSpell("Blink"))
+            self.spells.update(getSpell("Dispel Magic"))
+        elif level == 6:
+            self.classFeatures.append(f + "Channel Divinity (Cloak of Shadows)")
+        elif level == 7:
+            self.spells.update(getSpell("Dimension Door"))
+            self.spells.update(getSpell("Polymorph"))
+        elif level == 8:
+            self.classFeatures.append(f + "Divine Strike")
+        elif level == 9:
+            self.spells.update(getSpell("Dominate Person"))
+            self.spells.update(getSpell("Modify Memory"))
+        elif level == 17:
+            self.classFeatures.append(f + "Improved Duplicity")
 
     def getWarDomainFeature(self, level):
-        pass
+        f = "War Domain: "
+        if level == 1:
+            self.armorWeaponProficiencies.append("Martial Weapons")
+            self.armorWeaponProficiencies.append("Heavy Armor")
+            self.spells.update(getSpell("Divine Favor"))
+            self.spells.update(getSpell("Shield of Faith"))
+            self.classFeatures.append(f + 'War Priest')
+        elif level == 2:
+            self.classFeatures.append('Channel Divinity (Guided Strike)')
+        elif level == 3:
+            self.spells.update(getSpell("Magic Weapon"))
+            self.spells.update(getSpell("Spiritual Weapon"))
+        elif level == 5:
+            self.spells.update(getSpell("Crusader's Mantle"))
+            self.spells.update(getSpell("Spirit Guardians"))
+        elif level == 6:
+            self.classFeatures.append("Channel Divinity (War God's Blessing)")
+        elif level == 7:
+            self.spells.update(getSpell("Freedom of Movement"))
+            self.spells.update(getSpell("Stoneskin"))
+        elif level == 8:
+            self.classFeatures.append(f + "divine Strike")
+        elif level == 9:
+            self.spells.update(getSpell("Flame Strike"))
+            self.spells.update(getSpell("Hold Monster"))
+        elif level == 17:
+            self.classFeatures.append(f + "Avatar of Battle")
 
-    def addSkills(self):
-        avalSkills = ["arcana", "history", "nature", "religion"]
-        newSkills = sample(avalSkills, 2)
-        for s in newSkills:
-            self.expertSkills.append(s)
-            if s in self.profSkills:
-                continue
-            self.profSkills.append(s)
+
+    def addSkills(self, domain):
+        if domain == "Knowledge":
+            avalSkills = ["arcana", "history", "nature", "religion"]
+            newSkills = sample(avalSkills, 2)
+            for s in newSkills:
+                self.expertSkills.append(s)
+                if s in self.profSkills:
+                    continue
+                self.profSkills.append(s)
+        elif domain == "Nature":
+            avalSkills = ["animal handling", "nature", "survival"]
+            while True:
+                newSkills = sample(avalSkills, 1)[0]
+                if newSkills in self.profSkills:
+                    continue
+                self.profSkills.append(newSkills)
+                break
+        
 
     def pickSkills(self):
         self.profSkills = ["religion", sample(["history", "insight", "medicine", "persuasion"],1)[0]]

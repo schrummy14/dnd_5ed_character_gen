@@ -54,14 +54,32 @@ def getRandomSpell(level = None, spellClass = None):
     '''
     if level is None:
         level = [-1, 99]
+    elif type(level) is int:
+        level = [level-1, level]
+    elif type(level) is list():
+        pass
+    else:
+        print("Level must be either \"None, an integer, or a list\"")
     avalSpells = _allSpells.keys()
     returnedSpell = dict()
-    while True:
-        spellName = sample(avalSpells,1)[0]
-        randSpell = _allSpells[spellName]
-        if level[0] < randSpell["level"] and randSpell["level"] < level[1]:
-            if spellClass is None:
+    if spellClass is None:
+        while True:
+            spellName = sample(avalSpells,1)[0]
+            randSpell = _allSpells[spellName]
+            if level[0] < randSpell["level"] and randSpell["level"] <= level[1]:
                 returnedSpell[spellName] = randSpell
+                break
+    else:
+        spells = __classNames[spellClass]
+        spellKeys = spells.keys()
+        while True:
+            # Get a random key value (0, 1, 2, 3, ...)
+            spellKey = sample(spellKeys,1)[0]
+            if level[0] < spellKey and spellKey <= level[1]:
+                # We are in the correct spell range. Get a random spell
+                spellNameKeys = spells[spellKey]
+                randomSpell = sample(spellNameKeys,1)[0]
+                returnedSpell = getSpell(randomSpell)
                 break
     return returnedSpell
 
@@ -77,16 +95,18 @@ _allSpells = {
     'Acid Splash': _buildSpell(0, '60ft', '(1+floor((lvl-1)/4))d6', 'PH: 211'),
     'Aid': _buildSpell(2, '30ft', None, 'PH: 211'),
     'Alarm': _buildSpell(1, '30ft', None, 'PH: 211'),
-    'Alter Self': _buildSpell(2, 'self', None, 'PH: 211'),
+    'Alter Self': _buildSpell(2, 'Self', None, 'PH: 211'),
     'Animal Friendship': _buildSpell(1, '30ft', None, 'PH: 212'),
     'Animal Messenger': _buildSpell(2,'30ft', None, 'PH: 212'),
     'Animal Shapes': _buildSpell(8,'30ft', None, 'PH: 212'),
     'Animate Dead': _buildSpell(3, '10ft', None, 'PH: 212'),
     'Animate Objects': _buildSpell(5, '120ft', None, 'PH: 213'),
-    'Antilife Shell': _buildSpell(5, 'self', None, 'PH: 213'),
-    'Antimagic Field': _buildSpell(8, 'self', None, 'PH: 213'),
+    'Antilife Shell': _buildSpell(5, 'Self', None, 'PH: 213'),
+    'Antimagic Field': _buildSpell(8, 'Self', None, 'PH: 213'),
+    'Destructive Wave': _buildSpell(5, 'Self', '5d6+5d6', 'PH: 231'),
     'Dissonant Whispers': _buildSpell(1, '60ft', '3d6', 'PH: 234'),
-    'Light': _buildSpell(0, 'touch', None, 'PH: 255')
+    'Light': _buildSpell(0, 'touch', None, 'PH: 255'),
+    'Pass without Trace': _buildSpell(2, 'Self', None, 'PH: 264')
 }
 
 _bardSpells = {
