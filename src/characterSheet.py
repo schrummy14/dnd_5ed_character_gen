@@ -44,6 +44,8 @@ def readCharacterSheet(fileName, inFileName="document-output.pdf"):
 
 def _setSpells(player):
     vals = dict()
+    if len(player.spellStructure) == 0:
+        return vals
     curStr = list()
     for k in range(10):
         curStr.append(list())
