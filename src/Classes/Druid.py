@@ -80,9 +80,13 @@ class Druid(GenClass):
                 self.classFeatures[self.ws_id] = "Wild Shape [Max Cr: %d]" % (newCR)
             
 
+    def pickSkills(self):
+        self.profSkills = sample(["arcana", "animal handling", "insight", "medicine", "nature", "perception", "religion", "survival"],2)
+
     def getFeatures(self, level):
         if level == 1:
             self.classFeatures.append("Language: Druidic")
+            self.pickSkills()
         elif level == 2:
             self.ws_id = len(self.classFeatures)
             self.classFeatures.append("Wild Shape [Max Cr: 1/4, No Flying/Swimming]")
