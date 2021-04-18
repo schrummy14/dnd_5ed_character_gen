@@ -76,7 +76,8 @@ class Player:
             # Call class specific level ups
             self.classes.info.levelUp(self.level)
             self.atributes.addClassMods(self.classes.info.atributeValueMod)
-            if (self.level % 4 == 0 or self.level == 19) and self.level != 20:
+            if ((self.level % 4 == 0 or self.level == 19) and self.level != 20) or self.classes.info.needAbilityScoreImprovement:
+                self.classes.info.needAbilityScoreImprovement = False
                 for k in range(2):
                     atribute_name = self.chooseAtributeToIncrease()
                     if atribute_name is None:
@@ -87,7 +88,7 @@ class Player:
         self.health += self.level*self.atributes.modifiers["constitution"]
         self.maxHealth += self.level*self.atributes.modifiers["constitution"]
         self.proficiencyBonus = self.classes.info.getProfBonus(self.level)
-        self.ac = 10 + self.atributes.modifiers['dexterity']
+        self.updateAC()
         self.initiative = self.atributes.modifiers['dexterity']
         self.updateFeatures()
         self.updateSpells()
@@ -95,6 +96,14 @@ class Player:
         for key in self.classes.info.skills.keys():
             self.skills[key] = self.classes.info.skills[key] + self.atributes.modifiers[skills.skill2atribute[key]]
     
+    def updateAC(self):
+        self.ac = 10
+        for k in self.classes.info.acMod:
+            try:
+                self.ac += self.atributes.modifiers[k]
+            except:
+                self.ac += k
+
     def updateFeatures(self):
         vals = list()
         # Get Race Features

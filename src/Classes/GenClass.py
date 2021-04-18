@@ -11,6 +11,10 @@ class GenClass:
         self.classFeatures = list()
         self.numAttacks = 1
         self.speedMod = 0
+        self.meleeAttackBonus = 0
+        self.rangeAttackBonus = 0
+        self.meleeDamageBonus = 0
+        self.rangeDamageBonus = 0
         self.extraCritWeaponDice = 0
         self.acMod = ["dexterity"]
         self.atributeValueMod = {
@@ -31,6 +35,7 @@ class GenClass:
         self.spells = dict()
         self.spellStructure = list()
         self.extraLanguages = 0
+        self.needAbilityScoreImprovement = False
 
     def levelUp(self, level):
         pass

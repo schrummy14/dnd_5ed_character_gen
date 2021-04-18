@@ -5,6 +5,8 @@ import PyPDF2.generic
 import PyPDF2.pdf
 import PyPDF2.utils
 
+_maxFeaturesPageOne = 25
+
 def createCharacterSheet(player, outFileName="document-output.pdf"):
     inFile = open("characterSheet" + os.sep + "blank.pdf", 'rb')
     input1 = PdfFileReader(inFile)
@@ -76,7 +78,7 @@ def _setFeatures(player):
     curStr.append("")
     curStr.append("")
     for k, feat in enumerate(player.features):
-        curStrId = 0*(k<=20) + 1*(k>20)
+        curStrId = 0*(k<=_maxFeaturesPageOne) + 1*(k>_maxFeaturesPageOne)
         curStr[curStrId] += "* " + feat + '\n'
     vals[_num2field[87]] = curStr[0][:-1]
     vals[_num2field[10]] = curStr[1][:-1]
@@ -94,7 +96,7 @@ def _setAC(player):
     return {
         _num2field[22]: str(player.ac),
         _num2field[23]: str(player.initiative),
-        _num2field[24]: str(player.races.info.speed),
+        _num2field[24]: str(player.races.info.speed + player.classes.info.speedMod),
         _num2field[27]: str(player.maxHealth),
         _num2field[30]: str(player.health),
         _num2field[33]: str(player.tempHealth),
